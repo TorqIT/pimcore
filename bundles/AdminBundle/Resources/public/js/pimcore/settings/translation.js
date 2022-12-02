@@ -577,12 +577,24 @@ pimcore.settings.translation.domain = Class.create({
         }.bind(this));
     },
 
-    activate: function (filter) {
+    activate: function (domain = null, filter = null) {
+        let storeUpdated = false;
+        if(domain !== null && this.domain !== domain){
+            this.store.getProxy().setExtraParam("domain", domain);
+            this.filterDomainField.setValue(domain);
+
+            storeUpdated = true;
+        }
+
         if (filter) {
             this.store.getProxy().setExtraParam("searchString", filter);
-            this.store.load();
             this.filterField.setValue(filter);
+            
+            storeUpdated = true;
         }
+
+        if(storeUpdated) this.store.load();
+
         var tabPanel = Ext.getCmp("pimcore_panel_tabs");
         tabPanel.setActiveItem("pimcore_translations_domain");
     },
