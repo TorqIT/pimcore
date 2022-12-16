@@ -727,14 +727,10 @@ pimcore.object.classes.klass = Class.create({
         var suggestedColumns = [];
         var store = this.tree.getStore();
         var data = store.getData();
-        var relationTypes = ["ManyToOneRelation", "manyToManyObjectRelation", "advancedManyToManyObjectRelation"]
-        var currentColName;
         for (let i = 0; i < data.items.length; i++) {
             let record = data.items[i];
             if (record.data.type == "data") {
-                currentColName = record.data.text;
-                if(record.data.editor.type.toLowerCase().includes("manytoone")) currentColName = currentColName + "__id";
-                suggestedColumns.push([currentColName]);
+                suggestedColumns.push([record.data.text]);
             }
         }
 

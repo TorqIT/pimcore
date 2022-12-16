@@ -1422,6 +1422,15 @@ final class ClassDefinition extends Model\AbstractModel
      */
     public function setCompositeIndices($compositeIndices)
     {
+        $class = $this->getFieldDefinitions([]);
+        foreach($compositeIndices as $indexInd => $compositeIndex){
+            foreach($compositeIndex["index_columns"] as $fieldInd => $fieldName){
+                if(isset($class[$fieldName]) && str_contains(strtoupper($class[$fieldName]->getFieldType()), "MANYTOONE")){
+                    $compositeIndices[$indexInd]["index_columns"][$fieldInd] = $fieldName . "__id";
+                    $compositeIndices[$indexInd]["index_columns"][] = $fieldName . "__type";
+                }
+            }
+        }
         $this->compositeIndices = $compositeIndices ?? [];
 
         return $this;
