@@ -67,6 +67,14 @@ class TargetingCodeListener implements EventSubscriberInterface
 }
 ```
 
+Make sure to register the listener: 
+```yaml
+services:
+    App\EventListener\TargetingCodeListener:
+        tags:
+        - { name: kernel.event_listener }
+```
+
 The listener above sets a custom template which can either extend the core one or define a completely custom output:
 
 ```twig
@@ -82,6 +90,8 @@ The listener above sets a custom template which can either extend the core one o
     </script>
 {% endblock %}
 ```
+
+Now, documents that activate a Code-Snippet Action that is set up under Marketing > Global Marketing Rules will include the block appended in our listener. 
 
 ## Frontend Data Providers
 
