@@ -91,7 +91,7 @@ The listener above sets a custom template which can either extend the core one o
 {% endblock %}
 ```
 
-Now, documents that activate a Code-Snippet Action that is set up under Marketing > Personalization / Targeting > Global Marketing Rules will include the block appended in our listener. 
+Now, users with a match on a targeting rule set up under Marketing > Personalization / Targeting > Global Marketing Rules will see the block appended in our listener. 
 
 ## Frontend Data Providers
 
