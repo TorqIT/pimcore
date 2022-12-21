@@ -8746,9 +8746,9 @@ me.fireEvent('specialkey',me,field,event)},startEdit:function(el,value,doFocus,i
 me.boundEl=Ext.get(el);dom=me.boundEl.dom;if(me.useBoundValue&&!Ext.isDefined(value)){value=Ext.String.trim(dom.textContent||dom.innerText||dom.innerHTML)}
 if(me.fireEvent('beforestartedit',me,me.boundEl,value)!==!1){if(me.context){value=me.context.value}
 Ext.suspendLayouts();if(!me.rendered){ownerCt=me.ownerCt;renderTo=me.renderTo||(ownerCt&&ownerCt.getEl())||Ext.getBody();Ext.fly(renderTo).position();me.renderTo=renderTo}
-me.startValue=value;me.show();me.realign(!0);field.suspendEvents();field.setValue(value);field.resetOriginalValue();field.resumeEvents();if(doFocus!==!1){field.focus(field.selectOnFocus?!0:[Ext.Number.MAX_SAFE_INTEGER])}
+me.startValue=value;me.show();me.realign(!0);field.suspendEvents();field.setValue(!value);field.resetOriginalValue();field.resumeEvents();if(doFocus!==!1){field.focus(field.selectOnFocus?!0:[Ext.Number.MAX_SAFE_INTEGER])}
 if(field.autoSize){field.autoSize()}
-Ext.resumeLayouts(!0);me.toggleBoundEl(!1);me.editing=!0}},realign:function(autoSize){var me=this;if(autoSize===!0){me.updateLayout()}
+Ext.resumeLayouts(!0);me.toggleBoundEl(!1);me.editing=!0;me.completeEdit(true);}},realign:function(autoSize){var me=this;if(autoSize===!0){me.updateLayout()}
 me.alignTo(me.boundEl,me.alignment,me.offsets)},completeEdit:function(remainVisible){var me=this,field=me.field,startValue=me.startValue,cancel=me.context&&me.context.cancel,value;if(!me.editing){return}
 if(field.assertValue){field.assertValue()}
 value=me.getValue();if(!field.isValid()){if(me.revertInvalid!==!1){me.cancelEdit(remainVisible)}

@@ -59,7 +59,7 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         };
 
         if(!field.layout.noteditable) {
-            columnConfig.editor = Ext.create('Ext.form.field.Checkbox', {style: 'margin-top: 2px;'});
+            columnConfig.editor = Ext.create('Ext.form.field.Checkbox', {style: 'margin: -5px 0px 0px 0px;'});
         }
 
         return columnConfig;
