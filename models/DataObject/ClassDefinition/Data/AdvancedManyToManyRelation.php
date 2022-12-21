@@ -23,7 +23,7 @@ use Pimcore\Model\DataObject;
 use Pimcore\Model\Document;
 use Pimcore\Model\Element;
 
-class AdvancedManyToManyRelation extends ManyToManyRelation implements IdRewriterInterface, PreGetDataInterface
+class AdvancedManyToManyRelation extends ManyToManyRelation implements IdRewriterInterface, PreGetDataInterface, ClassSavedInterface
 {
     use DataObject\Traits\ElementWithMetadataComparisonTrait;
     use DataObject\ClassDefinition\Data\Extension\PositionSortTrait;
@@ -516,6 +516,10 @@ class AdvancedManyToManyRelation extends ManyToManyRelation implements IdRewrite
                     throw new Element\ValidationException(sprintf('Invalid relation in field `%s` [type: %s]', $this->getName(), $this->getFieldtype()));
                 }
             }
+
+            if ($this->getMaxItems() && count($data) > $this->getMaxItems()) {
+                throw new Element\ValidationException('Number of allowed relations in field `' . $this->getName() . '` exceeded (max. ' . $this->getMaxItems() . ')');
+            }
         }
     }
 
@@ -771,7 +775,7 @@ class AdvancedManyToManyRelation extends ManyToManyRelation implements IdRewrite
     /**
      * @param DataObject\ClassDefinition $class
      */
-    public function classSaved($class)
+    public function classSaved($class/**, $params = [] **/)
     {
         /** @var DataObject\Data\ElementMetadata $temp */
         $temp = \Pimcore::getContainer()->get('pimcore.model.factory')
