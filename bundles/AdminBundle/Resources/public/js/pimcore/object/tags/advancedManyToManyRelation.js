@@ -184,13 +184,7 @@ pimcore.object.tags.advancedManyToManyRelation = Class.create(pimcore.object.tag
                     }
                 }
             } else if (this.fieldConfig.columns[i].type === "bool" || this.fieldConfig.columns[i].type === "columnbool") {
-                renderer = function (value, metaData, record, rowIndex, colIndex, store) {
-                    if (this.fieldConfig.noteditable) {
-                        metaData.tdCls += ' grid_cbx_noteditable';
-                    }
-
-                    return Ext.String.format('<div style="text-align: center"><div role="button" class="x-grid-checkcolumn {0}" style=""></div></div>', value ? 'x-grid-checkcolumn-checked' : '');
-                }.bind(this);
+                renderer = pimcore.object.helpers.grid.prototype.advancedRelationRenderer(this.fieldConfig.columns[i]).bind(this);
 
                 listeners = {
                     "mousedown": this.cellMousedown.bind(this, this.fieldConfig.columns[i].key, this.fieldConfig.columns[i].type, readOnly)
