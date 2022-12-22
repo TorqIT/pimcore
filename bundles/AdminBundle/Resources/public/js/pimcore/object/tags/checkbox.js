@@ -14,15 +14,15 @@
 pimcore.registerNS("pimcore.object.tags.checkbox");
 pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
 
-    type:"checkbox",
+    type: "checkbox",
 
-    initialize:function (data, fieldConfig) {
+    initialize: function (data, fieldConfig) {
 
         this.data = data;
         this.fieldConfig = fieldConfig;
     },
 
-    applyDefaultValue: function() {
+    applyDefaultValue: function () {
         if ((typeof this.data === "undefined" || this.data === null)) {
             if (this.fieldConfig.defaultValue !== null) {
                 this.dataChanged = true;
@@ -62,11 +62,11 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         return columnConfig;
     },
 
-    getGridColumnFilter:function (field) {
-        return {type:'boolean', dataIndex:field.key};
+    getGridColumnFilter: function (field) {
+        return { type: 'boolean', dataIndex: field.key };
     },
 
-    getStyle: function() {
+    getStyle: function () {
         if (this.data === null) {
             return '#6782F6';
         }
@@ -74,9 +74,9 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         return '';
     },
 
-    updateStyle: function(newStyle) {
+    updateStyle: function (newStyle) {
 
-        if(!this.getObject() || !this.getObject().data.general.allowInheritance) {
+        if (!this.getObject() || !this.getObject().data.general.allowInheritance) {
             return;
         }
 
@@ -91,10 +91,10 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         }
     },
 
-    getLayoutEdit:function () {
+    getLayoutEdit: function () {
 
         var checkbox = {
-            name:this.fieldConfig.name,
+            name: this.fieldConfig.name,
             value: this.data,
             width: 25,
             handler: function (checkbox, checked) {
@@ -103,7 +103,7 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
                 this.updateStyle();
             }.bind(this),
             listeners: {
-                afterrender: function() {
+                afterrender: function () {
                     this.updateStyle();
                 }.bind(this)
             }
@@ -114,7 +114,7 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         this.checkbox = new Ext.form.Checkbox(checkbox);
 
         var componentCfg = {
-            fieldLabel:this.fieldConfig.title,
+            fieldLabel: this.fieldConfig.title,
             layout: 'hbox',
             items: [
                 this.checkbox,
@@ -140,7 +140,7 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         return this.component;
     },
 
-    createEmptyButton: function() {
+    createEmptyButton: function () {
         if (this.getObject()) {
             this.emptyButton = new Ext.Button({
                 iconCls: "pimcore_icon_delete",
@@ -161,12 +161,12 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         }
     },
 
-    addInheritanceSourceButton:function ($super, metaData) {
+    addInheritanceSourceButton: function ($super, metaData) {
         this.updateStyle("#6782F6");
         $super();
     },
 
-    getLayoutShow:function () {
+    getLayoutShow: function () {
 
         this.component = this.getLayoutEdit();
         this.component.disable();
@@ -174,15 +174,15 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         return this.component;
     },
 
-    getValue:function () {
+    getValue: function () {
         return this.data;
     },
 
-    getName:function () {
+    getName: function () {
         return this.fieldConfig.name;
     },
 
-    isDirty:function () {
+    isDirty: function () {
         return this.dataChanged;
     }
 });
