@@ -32,12 +32,13 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
         }
     },
 
-
-    getGridColumnConfig:function (field) {
+    getGridColumnConfig: function (field) {
         var columnConfig = {
+            xtype: "checkcolumn",
+            disabled: field.layout.noteditable,
             text: t(field.label),
-            dataIndex:field.key,
-            renderer:function (key, value, metaData, record, rowIndex, colIndex, store) {
+            dataIndex: field.key,
+            renderer: function (key, value, metaData, record, rowIndex, colIndex, store) {
                 var key = field.key;
                 var noteditable = field.layout.noteditable;
                 this.applyPermissionStyle(key, value, metaData, record);
@@ -57,10 +58,6 @@ pimcore.object.tags.checkbox = Class.create(pimcore.object.tags.abstract, {
                 return Ext.String.format('<div style="text-align: center"><div role="button" class="x-grid-checkcolumn{0}" style=""></div></div>', value ? '-checked' : '');
             }.bind(this, field)
         };
-
-        if(!field.layout.noteditable) {
-            columnConfig.editor = Ext.create('Ext.form.field.Checkbox', {style: 'margin-top: 2px;'});
-        }
 
         return columnConfig;
     },
