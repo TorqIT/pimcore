@@ -139,7 +139,6 @@ pimcore.object.tags.advancedManyToManyObjectRelation = Class.create(pimcore.obje
                 fc.hidden = false;
                 fc.layout = field;
                 fc.editor = null;
-                fc.sortable = false;
 
                 if (fc.layout.key === "fullpath") {
                     fc.renderer = this.fullPathRenderCheck.bind(this);
@@ -612,7 +611,7 @@ pimcore.object.tags.advancedManyToManyObjectRelation = Class.create(pimcore.obje
 
     getGridColumnConfig: function (field) {
         return {
-            text: t(field.label), width: 150, sortable: false, dataIndex: field.key,
+            text: t(field.label), width: 150, sortable: true, dataIndex: field.key,
             getEditor: this.getWindowCellEditor.bind(this, field),
             getRelationFilter: this.getRelationFilter,
             renderer: pimcore.object.helpers.grid.prototype.advancedRelationGridRenderer.bind(this, field, "fullpath")
