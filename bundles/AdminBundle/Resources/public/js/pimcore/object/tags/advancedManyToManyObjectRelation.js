@@ -98,7 +98,6 @@ pimcore.object.tags.advancedManyToManyObjectRelation = Class.create(pimcore.obje
                     this.dataChanged = true;
                 }.bind(this),
                 datachanged: function (store) {
-                    console.log('test');
                     this.dataChanged = true;
                 }.bind(this),
             },
