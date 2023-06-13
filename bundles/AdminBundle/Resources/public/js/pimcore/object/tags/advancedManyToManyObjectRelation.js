@@ -96,7 +96,11 @@ pimcore.object.tags.advancedManyToManyObjectRelation = Class.create(pimcore.obje
                         return;
                     }
                     this.dataChanged = true;
-                }.bind(this)
+                }.bind(this),
+                datachanged: function (store) {
+                    console.log('test');
+                    this.dataChanged = true;
+                }.bind(this),
             },
             model: modelName
         });
@@ -265,7 +269,8 @@ pimcore.object.tags.advancedManyToManyObjectRelation = Class.create(pimcore.obje
                 dataIndex: this.fieldConfig.columns[i].key,
                 renderer: renderer,
                 listeners: listeners,
-                width: width
+                width: width,
+                sortable: true
             };
 
             if (cellEditor) {
@@ -611,7 +616,7 @@ pimcore.object.tags.advancedManyToManyObjectRelation = Class.create(pimcore.obje
 
     getGridColumnConfig: function (field) {
         return {
-            text: t(field.label), width: 150, sortable: true, dataIndex: field.key,
+            text: t(field.label), width: 150, sortable: false, dataIndex: field.key,
             getEditor: this.getWindowCellEditor.bind(this, field),
             getRelationFilter: this.getRelationFilter,
             renderer: pimcore.object.helpers.grid.prototype.advancedRelationGridRenderer.bind(this, field, "fullpath")
