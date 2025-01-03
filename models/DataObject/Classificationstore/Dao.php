@@ -162,6 +162,10 @@ class Dao extends Model\Dao\AbstractDao
                 // if so, skip as there no need for a placeholder
                 if (!in_array(array_keys($groupKeys), $alreadySavedKeyIds)) {
                     $firstKey = reset($groupKeys);
+                    if ($firstKey === false) {
+                        // The array is empty, so there is no Definition to process further as a placeholder
+                        continue;
+                    }
                     $keyId = $firstKey->getKeyId();
                     $keyConfig = DefinitionCache::get($keyId);
                     $data = [
