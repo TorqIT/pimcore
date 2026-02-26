@@ -139,6 +139,36 @@ class LinkTest extends ModelTestCase
     }
 
     /**
+     * Verifies that getHtml() falls back to URL when no text is set
+     */
+    public function testGetHtmlFallsBackToUrl(): void
+    {
+        $link = new Link();
+        $link->setDirect('https://pimcore.com/');
+        $this->assertSame('<a href="https://pimcore.com/" >https://pimcore.com/</a>', $link->getHtml());
+    }
+
+    /**
+     * Verifies that getHtml() uses text when provided
+     */
+    public function testGetHtmlUsesText(): void
+    {
+        $link = new Link();
+        $link->setDirect('https://pimcore.com/');
+        $link->setText('Pimcore');
+        $this->assertSame('<a href="https://pimcore.com/" >Pimcore</a>', $link->getHtml());
+    }
+
+    /**
+     * Verifies that getHtml() returns empty string when no href is set
+     */
+    public function testGetHtmlEmptyWithNoHref(): void
+    {
+        $link = new Link();
+        $this->assertSame('', $link->getHtml());
+    }
+
+    /**
      * Verifies that Link data throws correct exceptions if invalid data is given
      *
      * @throws Exception
