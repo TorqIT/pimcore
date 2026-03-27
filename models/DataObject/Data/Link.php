@@ -409,13 +409,19 @@ class Link implements OwnerAwareFieldInterface
             $attribs[] = $this->getAttributes();
         }
 
-        $text = $this->getText();
+        $href = $this->getHref();
 
-        if (empty($text)) {
+        if (empty($href)) {
             return '';
         }
 
-        return '<a href="' . $this->getHref() . '" ' . implode(' ', $attribs) . '>' . htmlspecialchars($text) . '</a>';
+        $text = $this->getText();
+
+        if (empty($text)) {
+            $text = $href;
+        }
+
+        return '<a href="' . $href . '" ' . implode(' ', $attribs) . '>' . htmlspecialchars($text) . '</a>';
     }
 
     public function isEmpty(): bool
